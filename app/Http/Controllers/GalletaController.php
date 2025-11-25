@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class GalletaController extends Controller
 {
-    // Array con los mensajes de fortuna
     private $mensajes = [
         "Tendrás un día de alegrías y buenos momentos, disfrútalos como nunca.",
         "Concéntrate en lo que quieres lograr y ganaras. No lo olvides.",
@@ -39,13 +38,11 @@ class GalletaController extends Controller
         "Siente la felicidad que espera por ti y no olvides atraparla para mantenerla contigo."
     ];
 
-    // Mostrar la página de la galleta
     public function mostrar()
     {
         return view('galleta');
     }
 
-    // API: Obtener un mensaje aleatorio
     public function obtenerMensaje()
     {
         $mensajeAleatorio = $this->mensajes[array_rand($this->mensajes)];

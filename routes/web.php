@@ -11,8 +11,6 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/galleta', [GalletaController::class, 'mostrar'])->middleware('auth')->name('galleta');
 Route::get('/api/mensaje', [GalletaController::class, 'obtenerMensaje'])->middleware('auth');
-
-// Ruta protegida (solo usuarios logueados)
 Route::get('/galleta', function () {
     return view('galleta');
 })->middleware('auth');
