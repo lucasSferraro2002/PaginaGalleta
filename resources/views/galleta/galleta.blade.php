@@ -166,7 +166,18 @@
 
     <div class="botones" ng-show="galleta_abierta">
         <button ng-click="abrirOtraGalleta()">Otra Galleta</button>
-        <button ng-click="logout()">Logout</button>
+        @auth
+            <button onclick="window.location.href='/historial'">Mi Historial</button>
+            @if(auth()->user()->isAdmin())
+                <button onclick="window.location.href='/admin/frases'" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">Panel Admin</button>
+            @endif
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit">Cerrar Sesión</button>
+            </form>
+        @else
+            <button onclick="window.location.href='/login'">Iniciar Sesión</button>
+        @endauth
     </div>
 </div>
 
@@ -184,12 +195,13 @@
             $scope.galleta_abierta = true;
             $scope.cargando = true;
 
-            $http.get('/api/mensaje').then(function(response) {
+            $http.get('{{ route("galleta.mensaje") }}').then(function(response) {
                 $scope.mensaje = response.data.mensaje;
                 $scope.cargando = false;
             }, function(error) {
                 $scope.mensaje = 'Error al cargar el mensaje';
                 $scope.cargando = false;
+                console.error('Error:', error);
             });
         };
 

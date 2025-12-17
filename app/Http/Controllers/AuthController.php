@@ -47,7 +47,8 @@ class AuthController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'role' => 'usuario'
         ]);
 
         return redirect('/login')->with('success', 'Registro exitoso. Por favor inicia sesión.');
